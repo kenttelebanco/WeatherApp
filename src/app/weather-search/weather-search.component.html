@@ -1,0 +1,116 @@
+
+<div class="container">
+    <div class="row">
+      <h3 class="apptitle">APPDEV WEATHER APP</h3>
+        <div class="card">
+            <h3 class="text-center my-4">Weather Search:</h3>
+            <form [formGroup]="weatherSearchForm" (ngSubmit)="sendToAPIXU(weatherSearchForm.value)">
+              <div class="form-group">
+                <input class="text-center"
+                  class="form-control"
+                  type="text"
+                  id="weatherLocation"
+                  formControlName="location"
+                  aria-describedby="weatherLocation"
+                  placeholder="Enter Country/City"
+                />
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn btn-success btn-md">Search</button>
+                <input class="btn btn-primary btn-md" type="reset" value="Reset">
+              </div>
+              <span class="developed">Developed by Kent Michael Telebanco</span>
+            </form>
+          </div>
+          
+          <div class="card details">
+              <h3 class="text-center my-4">Weather Details:</h3>
+
+          <div class="info-details">
+            <div>
+              <div *ngIf="this.weatherData?.weather[0].main=='Clouds'">
+                <img src="https://thumbs.gfycat.com/PerfectDefiantBaboon-max-1mb.gif"
+                style="margin-left: 50px; width: 250px; height: 200px; object-fit: cover; object-position: 50% 50%;"/>
+                <p class="text-left"><b>
+                  {{this.weatherData?.name}}</b> ● {{this.weatherData?.weather[0].main}}<br>{{this.weatherData?.weather[0].description}}
+                </p>
+
+              </div>
+
+              <div *ngIf="this.weatherData?.weather[0].main=='Haze'">
+                <img src="https://content.presentermedia.com/content/animsp/00016000/16589/windy_flatcolor_image_300_wht.gif"
+                style="margin-left: 50px; width: 200px; height: 200px; object-fit: cover; object-position: 50% 50%;"/>
+                <p class="text-left"><b>
+                  {{this.weatherData?.name}}</b> ● {{this.weatherData?.weather[0].main}}
+                </p>
+              </div>
+
+              <div *ngIf="this.weatherData?.weather[0].main=='Snow'">
+                <img src="https://assets.website-files.com/5d9ba0eb5f6edb77992a99d0/5de7d426e3f495a4fd640f5c_Snowing.gif"
+                style="margin-left: 50px; width: 200px; height: 200px; object-fit: cover; object-position: 50% 50%;"/>
+                <p class="text-left"><b>
+                  {{this.weatherData?.name}}</b> ● {{this.weatherData?.weather[0].main}}
+                </p>
+              </div>
+
+              <div *ngIf="this.weatherData?.weather[0].main=='Storm'">
+                <img src="https://dafiles-dl.reallusion.com/Upload/JCTc800d2a6ddb3200a7/JCTc800d2a6ddb3200a7_931064e0-96ee-4a4d-bd3d-aed8f5817ef4_.gif"
+                style="margin-left: 50px; width: 200px; height: 200px; object-fit: cover; object-position: 50% 50%;"/>
+                <p class="text-left"><b>
+                  {{this.weatherData?.name}}</b> ● {{this.weatherData?.weather[0].main}}
+                </p>
+              </div>
+
+              <div *ngIf="this.weatherData?.weather[0].main=='Rain'">
+                <img src="https://content.presentermedia.com/content/animsp/00016000/16585/rain_flatcolor_image_300_wht.gif"
+                style="margin-left: 50px; width: 200px; height: 200px; object-fit: cover; object-position: 50% 50%;"/>
+                <p class="text-left"><b>
+                  {{this.weatherData?.name}}</b> ● {{this.weatherData?.weather[0].main}}
+                </p>
+              </div>
+
+              <div *ngIf="this.weatherData?.weather[0].main=='Clear'">
+                <img src="https://cdn.dribbble.com/users/622977/screenshots/6473478/weather-test-4.gif"
+                style="margin-left: 50px; width: 200px; height: 200px; object-fit: cover; object-position: 50% 50%;"/>
+                <p class="text-left"><b>
+                  {{this.weatherData?.name}}</b> ● {{this.weatherData?.weather[0].main}}
+                </p>
+              </div>
+            </div>
+
+            <div class="other-info" *ngIf="this.weatherid ==0">
+              <p class="time mt-3">As Of {{today | date:'fullDate'}} {{today | date:'h:mm a'}} (Phillipine Time)</p>
+
+              <p class="text-right">
+                <img *ngIf="this.weatherData?.main.temp<15 || this.weatherData?.main.temp==15" 
+                src="https://www.pngall.com/wp-content/uploads/4/Snowflake-PNG-Free-Image.png" 
+                style="margin-right: 10px; width: 50px; height: 50px; object-fit: cover;"/>
+
+                <img *ngIf="this.weatherData?.main.temp>15 && this.weatherData?.main.temp<25" 
+                src="https://www.freeiconspng.com/thumbs/cloud-icon/cloud-icon-8.png" 
+                style="margin-right: 10px; width: 50px; height: 50px; object-fit: cover;"/>
+
+                <img *ngIf="this.weatherData?.main.temp>25 || this.weatherData?.main.temp==25" 
+                src="https://static.vecteezy.com/system/resources/previews/001/188/470/large_2x/fire-icon-png.png" 
+                style="margin-right: 10px; width: 50px; height: 60px; object-fit: cover;"/>
+
+                Current Temperature: {{this.weatherData?.main.temp}}°C
+              </p>
+
+              <p class="text-right">
+                <img src="https://cdn-icons-png.flaticon.com/512/219/219816.png" 
+                style="margin-right: 10px; width: 50px; height: 50px; object-fit: cover;"/>
+                Current Humidity: {{this.weatherData?.main.humidity}}%
+              </p>
+              <p class="text-right">
+                <img src="https://icon-library.com/images/wind-icon-png/wind-icon-png-29.jpg" 
+                style="margin-right: 10px; width: 50px; height: 50px; object-fit: cover;"/>
+                Current Wind Speed: {{this.weatherData?.wind.speed}}%
+              </p>
+            </div>
+          </div>
+            </div>
+    </div>
+  </div>
+  
+  
